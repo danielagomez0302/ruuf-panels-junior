@@ -1,23 +1,29 @@
-name: Run Python Tests
+name: Python Tests
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Check out repository
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
 
-      - name: Run main.py
-        run: python3 main.py
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt || echo "No dependencies"
+
+    - name: Run packing 2D tests
+      run: python panel_packing.py
+
 
