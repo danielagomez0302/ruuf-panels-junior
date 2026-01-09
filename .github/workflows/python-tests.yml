@@ -1,4 +1,5 @@
-name: Run Python Tests
+name: Run main.py
+run: python3 junior/python/main.py
 
 on:
   push:
