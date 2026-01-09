@@ -1,15 +1,42 @@
-from typing import List, Tuple, Dict
+from typing import List, Dict
 import json
 
-
 def calculate_panels(panel_width: int, panel_height: int, 
-                    roof_width: int, roof_height: int) -> int:
-    
-    opcion1=(roof_width//panel_width)*(roof_height//panel_height)
-    opcion2=(roof_height//panel_width)*(roof_width//panel_height)
-    
-    return max(opcion1, opcion2)
-    
+                     roof_width: int, roof_height: int) -> int:
+
+    # Lista de espacios libres, cada uno es (x, y, w, h)
+    free_spaces: List[Tuple[int, int, int, int]] = [(0, 0, roof_width, roof_height)]
+    placed = 0  # Contador de paneles colocados
+
+    while True:
+        placed_this_round = False
+
+        for i, (x, y, w, h) in enumerate(free_spaces):
+            # Intentar colocar panel sin rotar
+            if panel_width <= w and panel_height <= h:
+                placed += 1
+                placed_this_round = True
+                free_spaces.pop(i)
+                # Dividir espacio libre en derecha y abajo
+                free_spaces.append((x + panel_width, y, w - panel_width, panel_height))  # derecha
+                free_spaces.append((x, y + panel_height, w, h - panel_height))          # abajo
+                break
+
+            # Intentar colocar panel rotado
+            elif panel_height <= w and panel_width <= h:
+                placed += 1
+                placed_this_round = True
+                free_spaces.pop(i)
+                free_spaces.append((x + panel_height, y, w - panel_height, panel_width))  # derecha
+                free_spaces.append((x, y + panel_width, w, h - panel_width))             # abajo
+                break
+
+        if not placed_this_round:
+            break  # No caben más paneles
+
+    return placed
+
+
 def run_tests() -> None:
     with open('test_cases.json', 'r') as f:
         data = json.load(f)
