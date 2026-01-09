@@ -27,4 +27,6 @@ Sin embargo, mencionar que aún con los calculos de manera logica matematica res
 
 ## 🎥 Video explicativo
 
-[PEGAR AQUÍ EL LINK DEL VIDEO]
+https://drive.google.com/file/d/1MLQq7w1YDxaZBT1AbGur43IIMLA6tqMP/view?usp=sharing
+
+Hola, muchas gracias por tomarse el tiempo de revisar mi postulación y video. Agradezco la oportunidad y disculpen si el video no es muy fluido, son cosas que debo mejorar y que estamos trabajando en ello.
